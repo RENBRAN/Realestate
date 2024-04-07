@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- Wizard View -->
+    <record id="Maintanance_details_view_wizard" model="ir.ui.view">
+        <field name="name">Property Survey</field>
+        <field name="model">property.survey.wizard</field>
+        <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+
+                                <field name="name" />
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="managment_score" options="{'type': 'number'}"/>
+                                <field name="amenities_score" options="{'type': 'number'}"/>
+                                <field name="overall_score" widget="priority"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_done" type="object"
+                            string="Submit"
+                            class="btn-primary" data-hotkey="q" />
+                        <button string="Cancel" icon="fa-trash" class="btn-secondary" special="cancel" data-hotkey="x" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+    <record id="property_survey_wizard_action" model="ir.actions.act_window">
+        <field name="name"> Property Survey action </field>  
+        <field name="res_model">property.survey.wizard</field>  
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="Maintanance_details_view_wizard"></field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!-- 
+    This view is for the transaction model.
+    It displays the tree view of transactions.
+    It has date, amount and property fields.
+    Parties details field is also displayed but is optional.
+-->
+<odoo>
+
+
+  <record id="transaction_view_tree" model="ir.ui.view">
+    <field name="name">Transaction.tree</field>
+    <field name="model">transaction</field>
+    <field name="arch" type="xml">
+      <!-- Tree view of transactions -->
+      <tree string="Transactions">
+        <!-- Transaction date -->
+        <field name="date" />
+        <!-- Transaction amount -->
+        <field name="amount" />
+        <!-- Transaction property -->
+        <field name="property_id" />
+
+        <!-- Parties details -->
+        <field name="parties_details" string="Parties details" optional="hide" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- 
+    This action is for the transaction model.
+    It displays the tree view of transactions.
+  -->
+  <record id="transaction_action" model="ir.actions.act_window">
+    <field name="name">Transaction action</field>
+    <field name="res_model">transaction</field>
+    <field name="view_mode">tree</field>
+  </record>
+
+
+</odoo>

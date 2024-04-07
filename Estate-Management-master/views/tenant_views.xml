@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    This file contains the definitions for the Tenant model views.
+-->
+
+<odoo>
+    <!--
+        View for the Tenant tree.
+    -->
+    <record id="tenant_view_tree" model="ir.ui.view">
+        <field name="name">Tenant.tree</field>
+        <field name="model">tenant</field>
+        <field name="arch" type="xml">
+            <!-- Tree view for the Tenant model -->
+            <tree string="Tenant Tree">
+                <!-- Name field -->
+                <field name="name" />
+                <!-- Contact information field -->
+                <field name="contact_information" />
+            </tree>
+        </field>
+    </record>
+
+    <!--
+        View for the Tenant kanban.
+    -->
+    <record id="tenant_view_kanban" model="ir.ui.view">
+        <field name="name">Tenant.kanban</field>
+        <field name="model">tenant</field>
+        <field name="arch" type="xml">
+            <!-- Kanban view for the Tenant model -->
+            <kanban string="Tenant Kanban">
+                <!-- Templates for the kanban -->
+                <templates>
+                    <!-- Template for the kanban box -->
+                    <t t-name="kanban-box">
+                        <div>
+                            <!-- Name field -->
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                            <!-- Contact information field -->
+                            <p>
+                                <field name="contact_information" />
+                            </p>
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="tenant_view_form" model="ir.ui.view">
+        <field name="name">Tenant.kanban</field>
+        <field name="model">tenant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </h1>
+                    <group>
+                        <field name="contact_information" />
+                        <field name="user_id" />
+                    </group>
+                    <notebook>
+                        <page string="Properties">
+
+                            <field name="property_ids">
+                                <tree create="false">
+                                    <field name="id" invisible='1' optional='hide' />
+                                    <field name="name" />
+                                    <field name="state" />
+                                    <button name="Estate_Management.Maintanance_request_wizard"
+                                        type="action"
+                                        title="Start Maintenance" icon="fa-wrench"
+                                        context="{'property_id': id}" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Agreements">
+                            <field name="aggreement_ids">
+                                <tree create="false">
+
+                                    <field name="name" />
+                                    <field name="price" />
+
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--
+        Action for the Tenant model.
+    -->
+    <record id="tenant_action" model="ir.actions.act_window">
+        <!-- Name of the action -->
+        <field name="name">Tenants action</field>
+        <!-- Model for the action -->
+        <field name="res_model">tenant</field>
+        <!-- View modes for the action -->
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+</odoo>

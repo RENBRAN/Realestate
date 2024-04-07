@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Menu items for the Estate Management module.
+    This is the main menu, it's a root menu.
+    It contains other menu items.
+-->
+<odoo>
+    <menuitem
+        id="estate_management_root_menu"
+        name="Estate Management"
+        sequence="5"
+    />
+
+    <!--
+    Menu item for the client module.
+    It contains other menu items.
+    -->
+    <menuitem
+        id="client_menu"
+        name="Client"
+        parent='estate_management_root_menu'
+        sequence="20"
+    />
+    <!--
+        Menu item for the owner model.
+        It's an action menu item, it will execute the owner_action.
+        -->
+    <menuitem
+        id="owner_menu_item"
+        name="Owners"
+        parent='client_menu'
+        action='owner_action'
+        sequence="10"
+    />
+    <!--
+        Menu item for the tenant model.
+        It's an action menu item, it will execute the tenant_action.
+        -->
+    <menuitem
+        id="tenant_menu_item"
+        name="Tenants"
+        parent='client_menu'
+        action='tenant_action'
+        sequence="20"
+    />
+    <menuitem
+        id="visitor_menu_item"
+        name="Visitors"
+        parent='client_menu'
+        action='visitor_action'
+        sequence="30"
+    />
+
+    <!--
+    Menu item for the property model.
+    It's an action menu item, it will execute the property_action.
+    -->
+    <menuitem
+        id="property_menu"
+        name="Property"
+        parent='estate_management_root_menu'
+        sequence="10"
+    />
+    <menuitem
+        id="properties_menu"
+        name="Property"
+        parent='property_menu'
+        action='property_action'
+        sequence="10"
+    />
+    <menuitem
+        id="maintanances_menu"
+        name="Maintanance"
+        parent='property_menu'
+        action='Maintanance_tree'
+        sequence="20"
+    />
+    <menuitem
+        id="property_document_menu"
+        name="Documents"
+        parent='property_menu'
+        action='property_document_action'
+        sequence="30"
+    />
+    <menuitem
+        id="property_asset_menu"
+        name="Assets"
+        parent='property_menu'
+        action='property_asset_action'
+        sequence="40"
+    />
+    <!--
+    Menu item for the transaction model.
+    It's an action menu item, it will execute the transaction_action.
+    -->
+    <menuitem
+        id="transaction_menu"
+        name="Transaction"
+        parent='estate_management_root_menu'
+        action='transaction_action'
+        sequence="30"
+    />
+
+    <menuitem
+        id="contract_management_menu"
+        name="Contracts"
+        parent='estate_management_root_menu'
+        sequence="40"
+    />
+    <menuitem
+        id="contract_menu"
+        name="Contracts"
+        parent='contract_management_menu'
+        action='contract_management_action'
+        sequence="10"
+    />
+    <menuitem
+        id="agreement_menu"
+        name="Agreements"
+        parent='contract_management_menu'
+        action='lease_agreement_action'
+        sequence="20"
+    />
+    <menuitem
+        id="contract_clause_menu"
+        name="Clauses"
+        parent='contract_management_menu'
+        action='contract_management_clause_action'
+        sequence="30"
+    />
+
+
+</odoo>
