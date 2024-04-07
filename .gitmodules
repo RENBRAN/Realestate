@@ -1,4 +1,0 @@
-[submodule "RENBRAN/pms"]
-	path = RENBRAN/pms
-	url = git@github.com:RENBRAN/pms.git
-	branch = 14.0
