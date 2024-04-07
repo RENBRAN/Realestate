@@ -15,7 +15,14 @@
     'website': "https://github.com/fraineralex",
 
     'category': 'Real Estate',
+
+
     'version': '17.0',
+
+    'version': '17.0',
+
+    'version': '17.0',
+
     'depends': ['base', 'sale'],
 
     'data': [
