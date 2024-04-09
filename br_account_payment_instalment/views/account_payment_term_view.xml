@@ -1,60 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="view_payment_term_line_tree_instalment" model="ir.ui.view">
-            <field name="name">account.payment.term.line.tree</field>
-            <field name="model">account.payment.term.line</field>
-            <field name="inherit_id" ref="account.view_payment_term_line_tree"/>
-            <field name="arch" type="xml">
-                <field name="option" position="after">
-                    <field name="period_type"/>
-                    <field name="period_count"/>
-                </field>
-            </field>
-        </record>
-
-        <record id="view_payment_term_form_instalment" model="ir.ui.view">
-            <field name="name">account.payment.term.form</field>
-            <field name="model">account.payment.term</field>
-            <field name="inherit_id" ref="account.view_payment_term_form"/>
-            <field name="arch" type="xml">
-                <p class="text-muted" position="replace">
-                    The last line's computation type should be "Balance or Instalment" to ensure that the whole amount will be allocated.
-                </p>
-            </field>
-        </record>
-
-        <record id="view_payment_term_line_form_instalment" model="ir.ui.view">
-            <field name="name">az.account.payment.term.line.form</field>
-            <field name="model">account.payment.term.line</field>
-            <field name="inherit_id" ref="account.view_payment_term_line_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//group/group[2]/div/label" position="attributes">
-                    <attribute name="options">{'invisible':[('value','in',['balance','instalment'])]}</attribute>
-                </xpath>
-                <xpath expr="//group/group[2]/div" position="attributes">
-                    <attribute name="options">{'invisible':[('value','in',['balance','instalment'])]}</attribute>
-                </xpath>
-                <xpath expr="//field[@name='days']" position="attributes">
-                    <attribute name="options">{'invisible':[('value','=','instalment')]}</attribute>
-                </xpath>
-                <xpath expr="//field[@name='option']" position="attributes">
-                    <attribute name="options">{'invisible':[('value','=','instalment')]}</attribute>
-                </xpath>
-                <xpath expr="//div/label[1][@for='days']" position="attributes">
-                    <attribute name="options">{'invisible':[('value','=','instalment')]}</attribute>
-                </xpath>
-                <xpath expr="//div[2]" position="attributes">
-                    <attribute name="options">{'invisible':['|',('option','!=', 'day_after_invoice_date'),('value','=','instalment')]}</attribute>
-                </xpath>
-                <xpath expr="//div[2]" position="after">
-                    <group options="{'invisible':[('value','!=','instalment')]}">
-                        <field name="period_type" options="{'required':[('value','=','instalment')]}"/>
-                        <field name="period_count" options="{'required':[('value','=','instalment')]}"/>
+    <!-- Modified payment term form view -->
+    <record id="view_payment_term_form_instalment" model="ir.ui.view">
+        <field name="name">Payment Terms Form</field>
+        <field name="model">account.payment.term</field>
+        <field name="arch" type="xml">
+            <form string="Payment Terms">
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <field name="fiscal_country_codes" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name" string="Payment Terms"/>
+                        <h1><field name="name" nolabel="1" placeholder="e.g. 30 days"/></h1>
+                    </div>
+                    <group>
+                        <field name="company_id" options="{'no_create': True}" class="w-25" groups="base.group_multi_company"/>
+                        <label for="early_discount"/>
+                        <div class="o_field_highlight">
+                            <field name="early_discount"/>
+                            <field name="discount_percentage" class="text-end o_field_highlight o_input oe_inline" invisible="not early_discount"/>
+                            <span invisible="not early_discount"> % if paid within </span>
+                            <field name="discount_days" class="text-end o_field_highlight o_input oe_inline" invisible="not early_discount"/>
+                            <span invisible="not early_discount"> days</span>
+                            <div invisible="not early_discount">
+                                <span> Reduced tax:
+                                    <field name="early_pay_discount_computation" class="w-auto"/>
+                                </span>
+                            </div>
+                        </div>
                     </group>
-                </xpath>
-
-            </field>
-        </record>
-    </data>
+                    <group>
+                        <group string="Due Terms">
+                            <field name="line_ids" widget="payment_term_line_ids" nolabel="1" colspan="2">
+                                <tree string="Payment Terms" editable="bottom" no_open="True">
+                                    <field name="value_amount"/>
+                                    <field name="value" nolabel="1"/>
+                                    <field name="nb_days" string="After"/>
+                                    <field name="delay_type" nolabel="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Preview">
+                            <field name="currency_id" invisible="1"/>
+                            <div class="d-flex gap-2" colspan="2" col="4">
+                                Example:
+                                <field name="example_amount" class="oe_inline"/>
+                                on
+                                <field name="example_date" class="fw-bold border-bottom o_example_date"/>
+                            </div>
+                            <div colspan="2" class="py-1 bg-secondary">
+                                <field name="note" placeholder="e.g. Payment terms: 30 days after invoice date" class="border-bottom o_example_note"/>
+                                <field name="example_preview_discount" class="ps-2" invisible="not early_discount or not display_on_invoice"/>
+                                <field name="example_preview" class="ps-2" invisible="not display_on_invoice"/>
+                            </div>
+                            <div colspan="2">
+                                <field name="display_on_invoice" nolabel="1"/>
+                                <label for="display_on_invoice"/>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 </odoo>
