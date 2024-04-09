@@ -1,7 +1,7 @@
 
 {
     'name': "Installment in Payment Terms",
-    'version': '14.0.1.0.0',
+    'version': '17.0.1.0.0',
     'author': 'Banibro IT Solutions Pvt Ltd.',
     'company': 'Banibro IT Solutions Pvt Ltd.',
     'website': 'https://banibro.com',
