@@ -1,4 +1,8 @@
+
 [submodule "RENBRAN/formio.js"]
 	path = RENBRAN/formio.js
 	url = git@github.com:RENBRAN/formio.js.git
-	branch = 4.19.x
+[submodule "RENBRAN/server-tools"]
+	path = RENBRAN/server-tools
+	url = git@github.com:RENBRAN/server-tools.git
+	branch = 16.0
