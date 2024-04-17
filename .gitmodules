@@ -1,0 +1,4 @@
+[submodule "RENBRAN/Realestate"]
+	path = RENBRAN/Realestate
+	url = git@github.com:RENBRAN/Realestate.git
+	branch = STAGING
