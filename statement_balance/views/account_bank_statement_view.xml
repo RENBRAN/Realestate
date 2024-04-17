@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+		<record id="statement_balance_bank_statement_form_inherit" model="ir.ui.view">
+			<field name="name">statement.balance.bank.statement.form.inherit</field>
+			<field name="model">account.bank.statement</field>
+			<field name="inherit_id" ref="account.view_bank_statement_form"/>
+			<field name="arch" type="xml">
+				<field name="date" position="after">
+					<field name="statement_balance"/>
+				</field>
+			</field>
+		</record>
+
+		<record id="statement_balance_bank_statement_tree_inherit" model="ir.ui.view">
+			<field name="name">statement.balance.bank.statement.tree.inherit</field>
+			<field name="model">account.bank.statement</field>
+			<field name="inherit_id" ref="account.view_bank_statement_tree"/>
+			<field name="arch" type="xml">
+				<field name="balance_end_real" position="after">
+					<field name="statement_balance"/>
+				</field>
+			</field>
+		</record>
+		
+    </data>
+</odoo>
